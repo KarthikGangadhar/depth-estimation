@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            // "program": "${workspaceFolder}/train.py",
+            "args": [
+                "5","5","0.0001",
+                // "--data", "nyu", "--bs", "5" ,"--full", "--dnetVersion", "small"
+            ]
+        }
+    ]
+}
