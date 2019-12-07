@@ -56,14 +56,16 @@ def create_model():
     model = Model(inputs=base_model.input, outputs=conv3)
     print('Model created.')
     
-    return model
+    return (base_model,model)
 
 def train(batch_size = 5 , epochs = 5, lr = 0.0001):
-    
+    batch_size = int(args[0])
+    epochs = int(args[1]) 
+    lr = float(args[2])
     print("batch_size = {0} , epochs = {1}, lr = {2}".format(batch_size,epochs, lr))
 
     #creates encoder and decoder model
-    model = create_model()
+    base_model , model = create_model()
 
     train_generator, test_generator = get_nyu_train_test_data( batch_size )
 
@@ -80,10 +82,10 @@ def train(batch_size = 5 , epochs = 5, lr = 0.0001):
     print('Ready for training!\n')
 
     callbacks = []
-    callbacks = get_nyu_callbacks(model, basemodel, train_generator, test_generator, load_test_data(), runPath)
+    callbacks = get_nyu_callbacks(model, base_model, train_generator, test_generator, load_test_data(), runPath)
 
     # Start training
-    model.fit_generator(train_generator, callbacks=callbacks, validation_data=test_generator, epochs=args.epochs, shuffle=True)
+    model.fit_generator(train_generator, callbacks=callbacks, validation_data=test_generator, epochs=epochs, shuffle=True)
 
     # Save the final trained model:
     basemodel.save(runPath + '/model.h5')
