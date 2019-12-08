@@ -19,14 +19,3 @@
         }
     ]
 }
-
-// _, frame = video.read()
-//         # img_array = np.array(im)
-//         # img_arr = get_img_arr(img_array)
-//         # output = scale_up(2, predict(model, img_arr, batch_size=1))
-//         # pred = output.reshape(output.shape[1], output.shape[2], 1)
-//         # img_set = display_single_image(pred, img_arr)
-//         # cv2.imshow("Capturing", img_set)
-//         # key=cv2.waitKey(1)
-//         # if key == ord('q'):
-//         #     break
