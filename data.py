@@ -5,10 +5,25 @@ from PIL import Image
 from zipfile import ZipFile
 from keras.utils import Sequence
 from augment import BasicPolicy
+import collections
 
 def extract_zip(input_zip):
     input_zip=ZipFile(input_zip)
     return {name: input_zip.read(name) for name in input_zip.namelist()}
+
+def extract_zip1(input_zip):
+    input_zip=ZipFile(input_zip)
+    output = collections.defaultdict(int)
+    nyu2_test_count = 0
+    nyu2_train_count = 0
+    for name in input_zip.namelist():
+        if 'nyu2_test' in name and nyu2_test_count <= 200:
+            nyu2_test_count += 1
+            output[name]= input_zip.read(name)
+        elif 'nyu2_train' in name and nyu2_train_count <= 200:
+            nyu2_train_count += 1
+            output[name]= input_zip.read(name) 
+    return output     
 
 def nyu_resize(img, resolution=480, padding=6):
     from skimage.transform import resize

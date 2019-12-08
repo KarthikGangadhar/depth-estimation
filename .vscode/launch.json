@@ -5,12 +5,28 @@
             "name": "Python",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/main.py",
-            // "program": "${workspaceFolder}/train.py",
+            // "program": "${workspaceFolder}/main.py",
+            "program": "${workspaceFolder}/video.py",
+            // "program": "${workspaceFolder}/test.py",
+            // "program": "${workspaceFolder}/video_display.py",
             "args": [
-                "5","5","0.0001",
+                // "5","5","0.0001",
                 // "--data", "nyu", "--bs", "5" ,"--full", "--dnetVersion", "small"
+                // "--model","nyu.h5","--input","tt.mp4"
+                // "--model",
+                "nyu.h5"
             ]
         }
     ]
 }
+
+// _, frame = video.read()
+//         # img_array = np.array(im)
+//         # img_arr = get_img_arr(img_array)
+//         # output = scale_up(2, predict(model, img_arr, batch_size=1))
+//         # pred = output.reshape(output.shape[1], output.shape[2], 1)
+//         # img_set = display_single_image(pred, img_arr)
+//         # cv2.imshow("Capturing", img_set)
+//         # key=cv2.waitKey(1)
+//         # if key == ord('q'):
+//         #     break
