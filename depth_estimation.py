@@ -9,7 +9,7 @@ Original file is located at
 Mahin's compressed data file
 """
 
-!wget -cq https://7cwlzw.bn.files.1drv.com/y4mWAvQpGUbcoxt7W3n_WjrKLU83U-pA7Kxgzqf3-WGPVqNGsIpVmTWxgJ0QTrR5zim8qWLznmGSVZVO3opMGdCiVohrsahq1gJ2qaaj54lHtbOYhFUo3gJDJ-Vsoa9L1twvaZOF5FPlPY-sJKr2XiXsC8BA2DmEV_h5-P62pNviMB-cO4W0dVEds9b2_F6iNpSGyjRUJL-gv1H0F5YSEOtguzOrnFD65fh3RVbh8e6-rE/nyu_data.zip
+# !wget -cq https://7cwlzw.bn.files.1drv.com/y4mWAvQpGUbcoxt7W3n_WjrKLU83U-pA7Kxgzqf3-WGPVqNGsIpVmTWxgJ0QTrR5zim8qWLznmGSVZVO3opMGdCiVohrsahq1gJ2qaaj54lHtbOYhFUo3gJDJ-Vsoa9L1twvaZOF5FPlPY-sJKr2XiXsC8BA2DmEV_h5-P62pNviMB-cO4W0dVEds9b2_F6iNpSGyjRUJL-gv1H0F5YSEOtguzOrnFD65fh3RVbh8e6-rE/nyu_data.zip
 
 """Yash's Reduced Data"""
 
@@ -17,9 +17,9 @@ Mahin's compressed data file
 
 """These two commands will download test and train dataset"""
 
-!wget -cq https://s3-eu-west-1.amazonaws.com/densedepth/nyu_test.zip
+# !wget -cq https://s3-eu-west-1.amazonaws.com/densedepth/nyu_test.zip
 
-!wget -cq https://s3-eu-west-1.amazonaws.com/densedepth/nyu_data.zip
+# !wget -cq https://s3-eu-west-1.amazonaws.com/densedepth/nyu_data.zip
 
 """No Replacement for this class, its called basic policy"""
 
@@ -574,7 +574,7 @@ if __name__ == "__main__":
     if (len(args) <= 0) : 
         sys.exit( 0 )
     
-    batch_size= 5 #int(args[0]), 
-    epochs= 2 #int(args[1]), 
-    lr= 0.0001 #float(args[2]),
+    batch_size= int(args[0]), 
+    epochs= int(args[1]), 
+    lr= float(args[2]),
     train(batch_size,epochs,lr)
