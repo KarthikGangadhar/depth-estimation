@@ -5,7 +5,7 @@
             "name": "Python",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/main.py",
+            "program": "${workspaceFolder}/depth_estimation.py",
             // "program": "${workspaceFolder}/video.py",
             // "program": "${workspaceFolder}/test.py",
             // "program": "${workspaceFolder}/video_display.py",
@@ -14,7 +14,7 @@
                 // "--data", "nyu", "--bs", "5" ,"--full", "--dnetVersion", "small"
                 // "--model","nyu.h5","--input","tt.mp4"
                 // "--model",
-                "nyu.h5"
+                // "nyu.h5"
             ]
         }
     ]
