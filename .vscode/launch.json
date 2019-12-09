@@ -5,12 +5,12 @@
             "name": "Python",
             "type": "python",
             "request": "launch",
-            // "program": "${workspaceFolder}/main.py",
-            "program": "${workspaceFolder}/video.py",
+            "program": "${workspaceFolder}/main.py",
+            // "program": "${workspaceFolder}/video.py",
             // "program": "${workspaceFolder}/test.py",
             // "program": "${workspaceFolder}/video_display.py",
             "args": [
-                // "5","5","0.0001",
+                "5","5","0.0001",
                 // "--data", "nyu", "--bs", "5" ,"--full", "--dnetVersion", "small"
                 // "--model","nyu.h5","--input","tt.mp4"
                 // "--model",

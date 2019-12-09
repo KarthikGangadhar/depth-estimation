@@ -28,7 +28,7 @@ def create_model():
     # Encoder Layers
     print('Loading base model (DenseNet)..')
     base_model = applications.DenseNet121(input_shape=(None, None, 3), include_top=False, weights='imagenet')
-    
+    print(base_model.summary())
     print('Base model loaded.')
 
     # Starting point for decoder
@@ -81,8 +81,8 @@ def train(batch_size = 5 , epochs = 5, lr = 0.0001):
 
     print('Ready for training!\n')
 
-    callbacks = []
-    callbacks = get_nyu_callbacks(model, base_model, train_generator, test_generator, load_test_data(), runPath)
+    # callbacks = []
+    # callbacks = get_nyu_callbacks(model, base_model, train_generator, test_generator, load_test_data(), runPath)
 
     # Start training
     model.fit_generator(train_generator, callbacks=None, validation_data=test_generator, epochs=epochs, shuffle=True)
