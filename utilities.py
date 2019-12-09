@@ -9,12 +9,12 @@ import keras
 from keras import backend as K
 import tensorflow as tf
 import numpy as np
-from utils import DepthNorm
+# from helpers import DepthNorm
 from io import BytesIO
 from PIL import Image
 from zipfile import ZipFile
 from keras.utils import Sequence
-from augment import BasicPolicy
+from helpers import BasicPolicy
 
 import keras.backend as K
 

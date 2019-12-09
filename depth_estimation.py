@@ -14,13 +14,6 @@ Mahin's compressed data file
 """Yash's Reduced Data"""
 
 # !wget -cp https://4iz2la.bn.files.1drv.com/y4mbkdtKoJnq_NBglCJJGvfrQdi3_-t48BOwi5p_lk_RA_R40AE2vZrXkhxo68LU6CXBI9Prxwle01FTupuJPexObohquqHgRiv1-oHAndwkJjPcoMaM3ALvTMn9go-BLYs7ehAb3tOfVCOnaHdGrtJcIQf8Zs6O82r4PzbbLJVWzsBF-Du_xtC3DutBA-ADiNHN2XZu1M8jOyRztXQxbNgbolbvmAfy9mbb_3WWN5SimM/nyu_data.zip
-
-"""These two commands will download test and train dataset"""
-
-# !wget -cq https://s3-eu-west-1.amazonaws.com/densedepth/nyu_test.zip
-
-# !wget -cq https://s3-eu-west-1.amazonaws.com/densedepth/nyu_data.zip
-
 """Reduced train file and main file, change the batch size, epoch and learning rate and run this file to start the training"""
 
 import os, sys, glob, time, pathlib
@@ -29,8 +22,6 @@ from keras import applications
 from keras.models import Model, load_model
 from keras.layers import Input, InputLayer, Conv2D, Activation, LeakyReLU, Concatenate
 from keras.optimizers import Adam
-from keras.utils import multi_gpu_model
-from keras.utils.vis_utils import plot_model
 
 # Kerasa / TensorFlow
 from helpers import BilinearUpSampling2D
@@ -49,37 +40,52 @@ def upproject(base_model, tensor, filters, name, concat_with):
 def create_model():
     
     # Encoder Layers
-    print('Loading base model (DenseNet)..')
-    base_model = applications.DenseNet121(input_shape=(None, None, 3), include_top=False, weights='imagenet')
+    # print('Loading base model (DenseNet)..')
+    # base_model = applications.DenseNet121(input_shape=(None, None, 3), include_top=False, weights='imagenet')
     
-    print('Base model loaded.')
+    # print('Base model loaded.')
 
-    # Starting point for decoder
-    base_model_output_shape = base_model.layers[-1].output.shape
-    print(" Output shape is: ", base_model_output_shape)
+    # # Starting point for decoder
+    # base_model_output_shape = base_model.layers[-1].output.shape
+    # print(" Output shape is: ", base_model_output_shape)
 
-    # Layer freezing?
-    for layer in base_model.layers: layer.trainable = True
+    # # Layer freezing?
+    # for layer in base_model.layers: layer.trainable = True
     
-    # Starting half number of decoder filters
+    # # Starting half number of decoder filters
     
-    decode_filters = int(int(base_model_output_shape[-1])/2)
+    # decode_filters = int(int(base_model_output_shape[-1])/2)
 
-    decoder = Conv2D(filters=decode_filters, kernel_size=1, padding='same', input_shape=base_model_output_shape, name='conv2')(base_model.output)
-    decoder = upproject(base_model, decoder, int(decode_filters/2), 'up1', concat_with='pool3_pool')
-    decoder = upproject(base_model, decoder, int(decode_filters/4), 'up2', concat_with='pool2_pool')
-    decoder = upproject(base_model, decoder, int(decode_filters/8), 'up3', concat_with='pool1')
-    decoder = upproject(base_model, decoder, int(decode_filters/16), 'up4', concat_with='conv1/relu')
-    if False: decoder = upproject(base_model, decoder, int(decode_filters/32), 'up5', concat_with='input_1')
+    # decoder = Conv2D(filters=decode_filters, kernel_size=1, padding='same', input_shape=base_model_output_shape, name='conv2')(base_model.output)
+    # decoder = upproject(base_model, decoder, int(decode_filters/2), 'up1', concat_with='pool3_pool')
+    # decoder = upproject(base_model, decoder, int(decode_filters/4), 'up2', concat_with='pool2_pool')
+    # decoder = upproject(base_model, decoder, int(decode_filters/8), 'up3', concat_with='pool1')
+    # decoder = upproject(base_model, decoder, int(decode_filters/16), 'up4', concat_with='conv1/relu')
+    # if False: decoder = upproject(base_model, decoder, int(decode_filters/32), 'up5', concat_with='input_1')
     
-    # Extract depths (final layer)
-    conv3 = Conv2D(filters=1, kernel_size=3, strides=1, padding='same', name='conv3')(decoder)
+    # # Extract depths (final layer)
+    # conv3 = Conv2D(filters=1, kernel_size=3, strides=1, padding='same', name='conv3')(decoder)
     
-    # Create the model
-    model = Model(inputs=base_model.input, outputs=conv3)
-    print('Model created.')
+    # # Create the model
+    # model = Model(inputs=base_model.input, outputs=conv3)
+    # print('Model created.')
+    net_input = Input(shape=(240,320,3))
+    base_model = keras.applications.vgg16.VGG16(include_top=False, weights='imagenet', input_tensor=net_input)
+
+    for layer in base_model.layers[:17]:
+        layer.trainable = False
     
-    return (base_model,model)
+    x = base_model.layers[-2].output
+    
+    ### Decoder
+    x = Deconv2D(256, (3,3), strides=(2,2), activation='relu', padding='same')(x)
+    x = Deconv2D(128, (3,3), strides=(2,2), activation='relu', padding='same')(x)
+    x = Deconv2D(64, (3,3), strides=(2,2), activation='relu', padding='same')(x)
+    x = Deconv2D(32, (3,3), strides=(2,2), activation='relu', padding='same')(x)
+    x = Deconv2D(1, (1,1), activation='sigmoid', padding='same')(x)
+    
+    # return model
+    return (base_model,x)
 
 def train(args, batch_size = 5 , epochs = 5, lr = 0.0001):
     batch_size = int(float(args[0]))
@@ -98,9 +104,10 @@ def train(args, batch_size = 5 , epochs = 5, lr = 0.0001):
     print('Output: ' + runPath)
 
     # Optimizer
-    optimizer = Adam(lr=lr, amsgrad=True)
+    # optimizer = Adam(lr=lr, amsgrad=True)
+    optimizer = keras.optimizers.RMSprop(lr=5e-4)
 
-    model.compile(loss=depth_loss_function, optimizer=optimizer)
+    model.compile(loss='binary_crossentropy', optimizer=optimizer, metrics=['accuracy'])
 
     print('Ready for training!\n')
 

@@ -1,17 +1,17 @@
+import sys
 import cv2
 import PIL
+import skimage
 import numpy as np
 from PIL import Image
 from keras import models
 from keras.models import load_model
 import matplotlib.pyplot as plt
-import skimage
-import sys
 from skimage.transform import resize
 
-from utils import predict, scale_up
-from layers import BilinearUpSampling2D
-from loss import depth_loss_function
+from utilities import predict, scale_up
+from helpers import BilinearUpSampling2D
+from utilities import depth_loss_function
 
 plasma = plt.get_cmap('plasma')
 video = cv2.VideoCapture(0)
