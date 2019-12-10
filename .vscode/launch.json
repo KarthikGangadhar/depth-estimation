@@ -5,16 +5,16 @@
             "name": "Python",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/depth_estimation.py",
+            // "program": "${workspaceFolder}/depth_estimation.py",
             // "program": "${workspaceFolder}/video.py",
             // "program": "${workspaceFolder}/test.py",
-            // "program": "${workspaceFolder}/video_display.py",
+            "program": "${workspaceFolder}/video_display.py",
             "args": [
-                "5","5","0.0001",
+                // "5","5","0.0001",
                 // "--data", "nyu", "--bs", "5" ,"--full", "--dnetVersion", "small"
                 // "--model","nyu.h5","--input","tt.mp4"
                 // "--model",
-                // "nyu.h5"
+                "model.h5"
             ]
         }
     ]

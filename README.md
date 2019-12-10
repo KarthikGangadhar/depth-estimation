@@ -20,7 +20,7 @@ This version has been modified by me to
 * [NYU Depth V2](https://s3-eu-west-1.amazonaws.com/densedepth/nyu.h5) (165 MB)
 
 
-We Above paper used the pre-trained keras DenseNet201, DenseNet121, DenseNet169 and ResNet50 models, We used [unet](https://lmb.informatik.uni-freiburg.de/people/ronneber/u-net/) [Model](https://github.com/zhixuhao/unet) encodered and decoder model with the same optimizer and the loss function to replicate the result
+The Above paper used the pre-trained keras DenseNet201, DenseNet121, DenseNet169 and ResNet50 models, We used [unet](https://lmb.informatik.uni-freiburg.de/people/ronneber/u-net/) [Model](https://github.com/zhixuhao/unet) encoder and decoder model with the same optimizer and the loss function to replicate the result
 
 ## Training with UNet encoder
 * Train the model: 
@@ -39,6 +39,9 @@ python video_display.py model.h5
 
 # model.h5 is the created model
 ```
+
+## Download a pretrained model from our approach
+* [UNet trained model](https://drive.google.com/open?id=1WbVr3e7-kVDRtShCuaK-BtlzUePXYFWm) (477 MB)
 
 ## Result Comparison
 
