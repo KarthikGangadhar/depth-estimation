@@ -8,7 +8,7 @@ This version has been modified here to
 * Create webcam based test to the model on realtime images
 
 ## Requirements
-* This code is tested with `Keras 2.2.4`, `Tensorflow 1.13`, `CUDA 9.0`, on Google Colab.
+* This code is tested with `Keras 2.2.4`, `Tensorflow 1.13`, `CUDA 9.0`, on [Google Colab](https://colab.research.google.com/notebooks/welcome.ipynb).
 * Other packages needed `keras pillow matplotlib scikit-learn scikit-image opencv-python pydot` and `GraphViz`.
 
 
