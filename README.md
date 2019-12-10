@@ -3,13 +3,12 @@
 **[Ibraheem Alhashim](https://ialhashim.github.io/)** and **Peter Wonka**
 
 The original code is at the repo [Dense Depth Original Code](https://github.com/ialhashim/DenseDepth)
-This version has been modified by me to 
-* Add support for different encoders
-* Test the effect of decreasing decoder length
-* Create cool visualizations by testing the model on self collected images and videos
+This version has been modified here to 
+* Add support for U-Net encoders
+* Create webcam based test to the model on realtime images
 
 ## Requirements
-* This code is tested with Keras 2.2.4, Tensorflow 1.13, CUDA 9.0, on a machine with an NVIDIA Titan V and 16GB+ RAM running on Windows 10 or Ubuntu 16.
+* This code is tested with `Keras 2.2.4`, `Tensorflow 1.13`, `CUDA 9.0`, on a machine with an NVIDIA Titan V and 16GB+ RAM running on Windows 10 or Ubuntu 16.
 * Other packages needed `keras pillow matplotlib scikit-learn scikit-image opencv-python pydot` and `GraphViz`.
 
 
