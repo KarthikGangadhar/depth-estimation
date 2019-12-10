@@ -10,8 +10,6 @@ from keras.optimizers import Adam
 # Kerasa / TensorFlow
 from utilities import get_nyu_train_test_data, load_test_data, depth_loss_function
 
-
-
 def create_model():
         
     print('Loading base model (UNet)..')
