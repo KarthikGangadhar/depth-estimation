@@ -8,7 +8,7 @@ This version has been modified here to
 * Create webcam based test to the model on realtime images
 
 ## Requirements
-* This code is tested with `Keras 2.2.4`, `Tensorflow 1.13`, `CUDA 9.0`, on a machine with an NVIDIA Titan V and 16GB+ RAM running on Windows 10 or Ubuntu 16.
+* This code is tested with `Keras 2.2.4`, `Tensorflow 1.13`, `CUDA 9.0`, on Google Colab.
 * Other packages needed `keras pillow matplotlib scikit-learn scikit-image opencv-python pydot` and `GraphViz`.
 
 
